@@ -1,10 +1,4 @@
 import logo from './logo.svg';
-
-import Prism, { highlight } from "prismjs";
-import 'prismjs/components/prism-csharp';
-import 'prismjs/plugins/line-numbers/prism-line-numbers.js';
-import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
-import 'prismjs/themes/prism-okaidia.css';
 import React, { useEffect, useRef, useState } from 'react';
 import "./App.css"
 import axios from 'axios';
@@ -13,7 +7,7 @@ import hljs  from 'highlight.js';
 import 'highlight.js/styles/night-owl.min.css';
 // import 'highlight.js/styles/atom-one-dark.css';
 import SkeletonLoader from './component/spinner';
-// import { response } from 'express';
+
 
 
 
@@ -59,8 +53,8 @@ const codeInterval = useRef(null);
 useEffect(() => {
   if (shouldFetch) {
     setShouldFetch(false);
-    async function fetch() {
-      const { data } = await axios.post("https://backend-of-ai.vercel.app/chat", { prompt });
+    async function codefetch() {
+      const { data } = await axios.post("http://localhost:4000/chat", { prompt });
 
       if (data.header || data.code || data.explaination) {
         let CodeIndex = 0;
@@ -137,15 +131,17 @@ useEffect(() => {
 
       }
       else{
-        alert("something went wrong")
+        alert("something went wrong replfrsh the page")
+        window.location.reload()
       }
     }  
 
-  
+    codefetch()
   
     }
     // function call
-    fetch()
+   
+   
   
 }, [shouldFetch]);
 
@@ -223,7 +219,7 @@ setChatHistory((prev)=>[...prev,{prompt:value}])
                 {item.response.header && <h2 className="text-[14px] font-medium text-white font-inter">{item.response.header}</h2>}
                 {item.response.code && (
                   <pre className="   bg-code_color border-[2px] border-solid  border-code_border  p-4 rounded-md overflow-auto">
-                    <code className="   font-firo-code text-sm" ref={coderef}>
+                    <code className="   font-firo-code md:text-sm sm:text-[12px]" ref={coderef}>
                       {item.response.code}
                     </code>
                   </pre>
