@@ -60,7 +60,7 @@ useEffect(() => {
   if (shouldFetch) {
     setShouldFetch(false);
     async function fetch() {
-      const { data } = await axios.post("http://localhost:4000/chat", { prompt });
+      const { data } = await axios.post("https://backend-of-ai.vercel.app/chat", { prompt });
 
       if (data.header || data.code || data.explaination) {
         let CodeIndex = 0;
