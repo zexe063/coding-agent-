@@ -136,16 +136,23 @@ useEffect(() => {
 
 
       }
-      // if elese
+      else{
+        alert("something went wrong")
+      }
     }  
+
+  
+  
+    }
     // function call
     fetch()
-  }
+  
 }, [shouldFetch]);
 
 
 
 
+    
 
 
 
